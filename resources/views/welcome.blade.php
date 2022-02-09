@@ -1,3 +1,6 @@
+@extends('layout')
+@section('welcome')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -84,6 +87,8 @@
                     Laravel
                 </div>
 
+                <i class="bi bi-activity"></i>
+
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -98,3 +103,4 @@
         </div>
     </body>
 </html>
+@endsection
