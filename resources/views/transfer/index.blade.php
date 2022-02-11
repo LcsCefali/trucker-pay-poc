@@ -68,11 +68,21 @@
             <h2>Lista de favorecidos</h1>
           </div>
 
-          <div class="row app-row ml-1">
+          <div class="app-row ml-1">
             <div class="form-group">
-              <div class="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">
-                <input placeholder="Search...">
-              </div>
+              <form action="{{ url('/transfer') }}" method="GET">
+                @csrf
+                <div class="input-group typeahead-container">
+                  <input type="text" class="form-control typeahead" name="s" id="s"
+                      placeholder="Start typing something to search..." data-provide="typeahead"
+                      autocomplete="off" value="{{ @$s }}">
+                  <div class="input-group-append ">
+                      <button type="submit" class="btn btn-primary default">
+                          <i class="simple-icon-magnifier"></i>
+                      </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
 

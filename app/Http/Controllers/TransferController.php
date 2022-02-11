@@ -9,16 +9,18 @@ use Illuminate\Http\Request;
 
 class TransferController extends Controller
 {
-    public function index() {
-        $favoredsTruckerPay = Favored::where([
-            'isTruckPay' => 1
-        ])->get();
+    public function index(Request $request) {
+        $s = $request->get('s');
 
-        $otherFavoreds = Favored::where([
-            'isTruckPay' => 0
-        ])->get();
+        if ($request->has('s')) { // search
+            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->where('name', 'like', "%$s%")->get();
+            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->where('name', 'like', "%$s%")->get();
+        } else {
+            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->get();
+            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->get();
+        }
 
-        return view('transfer.index', ['favoredsTruckerPay' => $favoredsTruckerPay, 'otherFavoreds' => $otherFavoreds]);
+        return view('transfer.index', ['favoredsTruckerPay' => $favoredsTruckerPay, 'otherFavoreds' => $otherFavoreds, 's' => $s]);
     }
 
     public function find($id) {
@@ -46,7 +48,7 @@ class TransferController extends Controller
         $date = $request->input('date');
         $date = explode('/', $date);
         if(isset($date[0])) {
-            $date = $date[2] . '-' . $date[0] . '-' . $date[1];
+            $date = $date[2] . '-' . $date[1] . '-' . $date[0];
         }
 
         $value = str_replace(",", ".", $request->input('value'));

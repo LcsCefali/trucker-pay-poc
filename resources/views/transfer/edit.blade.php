@@ -133,7 +133,7 @@
     <div class="form-group col-12 col-xs-6">
       <div class="form-group row mb-1">
         <label for="date">Data <label class='required'>*</label></label>
-        <input class="form-control datepicker date" id="date" name="date" value="{{@$favoredFinded->date}}" placeholder="Selecione uma data">
+        <input class="form-control datepicker date" id="date" name="date" value="{{@$favoredFinded->date}}" placeholder="Selecione uma data" autocomplete="off" >
       </div>
 
       <div class="form-group row mb-1 mt-4">

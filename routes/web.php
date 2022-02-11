@@ -13,14 +13,7 @@ use App\Http\Controllers\TransferController;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
-
-Route::get('/layout', function () {
-    return view('layoutFull');
-});
-
+Route::get('/', [TransferController::class, 'index'])->name('index to transfer');
 Route::get('/transfer', [TransferController::class, 'index'])->name('transfer');
 Route::get('/transfer/{id}/find', [TransferController::class, 'find'])->name('find favored'); // rota para quando selecionar o favorecido
 Route::post('/transfer/create', [TransferController::class, 'create'])->name('create favored');
