@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Favored extends Model
+class Transfer extends Model
 {
     protected $fillable = [
         'bankCode',
@@ -15,6 +15,7 @@ class Favored extends Model
         'account',
         'accountType',
         'date',
+        'value',
         'isTruckPay'
     ];
 }

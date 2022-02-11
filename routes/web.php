@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TransferController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layout');
 });
+
+Route::get('/layout', function () {
+    return view('layoutFull');
+});
+
+Route::get('/transfer', [TransferController::class, 'index'])->name('transfer');
+Route::get('/transfer/{id}/find', [TransferController::class, 'find'])->name('find favored'); // rota para quando selecionar o favorecido
+Route::post('/transfer/create', [TransferController::class, 'create'])->name('create favored');
+Route::post('/transfer/update/{id}', [TransferController::class, 'update'])->name('update favored'); // rota para quando selecionar o favorecido
+Route::delete('/transfer/delete/{id}', [TransferController::class, 'delete'])->name('delete favored');

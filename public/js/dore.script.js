@@ -49,7 +49,6 @@ Table of Contents
   03.42. Glide
   03.43. Validation
 */
-
 /* 01. Utils */
 $.fn.addCommas = function (nStr) {
   nStr += "";
