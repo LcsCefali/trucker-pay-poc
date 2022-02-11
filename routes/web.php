@@ -14,6 +14,9 @@ use App\Http\Controllers\TransferController;
 */
 
 Route::get('/', [TransferController::class, 'index'])->name('index to transfer');
+Route::get('/teste', function () {
+  view('welcome');
+});
 Route::get('/transfer', [TransferController::class, 'index'])->name('transfer');
 Route::get('/transfer/{id}/find', [TransferController::class, 'find'])->name('find favored'); // rota para quando selecionar o favorecido
 Route::post('/transfer/create', [TransferController::class, 'create'])->name('create favored');

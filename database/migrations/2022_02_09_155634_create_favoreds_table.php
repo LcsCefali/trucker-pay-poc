@@ -24,6 +24,8 @@ class CreateFavoredsTable extends Migration
             $table->string('accountType')->nullable();
             $table->date('date');
             $table->boolean('isTruckPay');
+
+            $table->unique(['document', 'bankName', 'agency', 'account']);
         });
     }
 

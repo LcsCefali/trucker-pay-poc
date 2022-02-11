@@ -1,4 +1,4 @@
-<form action="{{ url('transfer/create') }}" method="POST">
+<form action="{{ url('transfer/create') }}" method="POST" novalidate>
   @csrf
 
     <div class="form-group">
@@ -74,30 +74,55 @@
             echo $banks;
           @endphp
         </select>
+        @error('bankName')
+          <div class="alert alert-warning rounded mt-1" role="alert">
+            {{ $message }}
+          </div>
+        @enderror
     </div>
 
     <div class="form-group">
       <label for="document">CPF/CNPJ <label class='required'>*</label></label>
       <input type="text" class="form-control" id="document" name="document" onchange="formatDocument(this)" value="{{@$favoredFinded->document}}" required>
+      @error('document')
+        <div class="alert alert-warning rounded mt-1" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label for="name">Nome Completo <label class='required'>*</label></label>
       <input type="text" class="form-control" id="name" name="name" oninput="validateName(this)" value="{{@$favoredFinded->name}}" required>
+      @error('name')
+        <div class="alert alert-warning rounded mt-1" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
     </div>
 
     <div class="form-group">
-      <label for="agency">Agência (sem dígito)<label class='required'>*</label></label>
+      <label for="agency">Agência (sem dígito) <label class='required'>*</label></label>
       <input type="text" class="form-control" id="agency" name="agency" oninput="validateNumbers(this)" value="{{@$favoredFinded->agency}}" required>
+      @error('agency')
+        <div class="alert alert-warning rounded mt-1" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
     </div>
 
     <div class="form-group">
       <label for="account">Conta Corrente (com dígito) <label class='required'>*</label></label>
       <input type="text" class="form-control" id="account" name="account" value="{{@$favoredFinded->account}}"  required>
+      @error('account')
+        <div class="alert alert-warning rounded mt-1" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
     </div>
 
     <div class="form-group">
-      <label for="accountType">Conta Corrente ou Poupança</label>
+      <label for="accountType">Conta Corrente ou Poupança <label class='required'>*</label></label>
       <select id="accountType" name="accountType" class="form-control" >
           <option selected value='Conta Corrente'>Conta Corrente</option>
           <option value='Conta Poupança'>Conta Poupança</option>
@@ -107,12 +132,22 @@
     <div class="form-group">
       <label for="value">Valor <label class='required'>*</label></label>
       <input type="text" class="form-control" id="value" name="value" value="{{@$favoredFinded->value}}" oninput="formatReal(this)" required>
+      @error('value')
+        <div class="alert alert-warning rounded mt-1" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
     </div>
 
     <div class="form-group col-12 col-xs-6">
       <div class="form-group row mb-1">
         <label for="date">Data <label class='required'>*</label></label>
         <input class="form-control datepicker date" id="date" name="date" value="{{@$favoredFinded->date}}" placeholder="Selecione uma data" autocomplete="off" >
+        @error('date')
+          <div class="alert alert-warning rounded mt-1" role="alert">
+            {{ $message }}
+          </div>
+        @enderror
       </div>
 
       <div class="form-group row mb-1 mt-4">
@@ -127,7 +162,6 @@
     </div>
     </div>
   
-
-    <button type="button" class="btn btn-primary mb-0">Voltar</button>
+    <a href="{{ url('/transfer') }}" class="btn btn-primary mb-0">Voltar</a>
     <button type="submit" class="btn btn-secondary mb-0">Avançar</button>
 </form>

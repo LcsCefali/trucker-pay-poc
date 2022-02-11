@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Favored;
 use App\Transfer;
+use App\Http\Requests\TransferRequest;
 use Redirect;
 use Illuminate\Http\Request;
 
@@ -13,11 +14,11 @@ class TransferController extends Controller
         $s = $request->get('s');
 
         if ($request->has('s')) { // search
-            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->where('name', 'like', "%$s%")->get();
-            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->where('name', 'like', "%$s%")->get();
+            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->where('name', 'like', "%$s%")->get()->sortBy('name');
+            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->where('name', 'like', "%$s%")->get()->sortBy('name');
         } else {
-            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->get();
-            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->get();
+            $favoredsTruckerPay = Favored::where('isTruckPay', '=', 1)->get()->sortBy('name');
+            $otherFavoreds = Favored::where('isTruckPay', '=', 0)->get()->sortBy('name');
         }
 
         return view('transfer.index', ['favoredsTruckerPay' => $favoredsTruckerPay, 'otherFavoreds' => $otherFavoreds, 's' => $s]);
@@ -37,7 +38,7 @@ class TransferController extends Controller
         return view('transfer.index', ['favoredFinded' => $favoredFinded, 'favoredsTruckerPay' => $favoredsTruckerPay, 'otherFavoreds' => $otherFavoreds]);
     }
 
-    public function create(Request $request) {
+    public function create(TransferRequest $request) {
         $bankName = $request->input('bankName');
         $document = $request->input('document');
         $name = $request->input('name');
@@ -112,7 +113,7 @@ class TransferController extends Controller
         return Redirect::to('/transfer');
     }
 
-    public function update(Request $request, $id) {
+    public function update(TransferRequest $request, $id) {
         $bankName = $request->input('bankName');
         $document = $request->input('document');
         $name = $request->input('name');

@@ -2,6 +2,9 @@
 
 @section('content')
 <style>
+.required {
+  color: red;
+}
 .profileImage {
   font-family: Arial, Helvetica, sans-serif;
   width: 2.5rem;
